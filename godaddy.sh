@@ -18,25 +18,25 @@
 # Begin settings
 # Get the Production API key/secret from https://developer.godaddy.com/keys/.
 # Ensure it's for "Production" as first time it's created for "Test".
-Key=<API production key>
-Secret=<API secret>
+Key=$1
+Secret=$2
 
 # Domain to update.
-Domain=<domain name>
+Domain=$3
 
 # Advanced settings - change only if you know what you're doing :-)
 # Record type, as seen in the DNS setup page, default A.
-Type=A
+Type=${4:-'A'}
 
 # Record name, as seen in the DNS setup page, default @.
-Name=@
+Name=${5:-'@'}
 
 # Time To Live in seconds, minimum default 600 (10mins).
 # If your public IP seldom changes, set it to 3600 (1hr) or more for DNS servers cache performance.
 TTL=600
 
 # Writable path to last known Public IP record cached. Best to place in tmpfs.
-CachedIP=/tmp/current_ip
+CachedIP="/tmp/current_ip_godaddy_$Type-$Name-$Domain"
 
 # External URL to check for current Public IP, must contain only a single plain text IP.
 # Default http://api.ipify.org.
